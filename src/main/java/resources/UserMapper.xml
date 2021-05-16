@@ -1,0 +1,27 @@
+<mapper namespace="com.ozdemo.test.IUserDao">
+    <!-- sql的唯一标识：namespace.id来组成 ： statementId -->
+    <select id="findAll" resultType="com.ozdemo.test.User">
+        select * from user
+    </select>
+
+    <!--
+    User.user = new User()
+    user.setId(1);
+    user.setUsername("")
+    -->
+    <select id="findOne" resultType="com.ozdemo.test.User" paramterType="com.ozdemo.test.User">
+        select * from user where uid = #{uid} and username = #{username}
+    </select>
+
+    <insert id="insertOne" paramterType="com.ozdemo.test.User" resultType="java.lang.Integer">
+        insert into user(username) values(#{username})
+    </insert>
+
+    <update id="updateOne" paramterType="com.ozdemo.test.User"  resultType="java.lang.Integer">
+        update user set uid=#{uid},username=#{username} where uid=#{uid}
+    </update>
+
+    <delete id="deleteById" paramterType="java.lang.Integer" resultType="java.lang.Integer">
+        delete from user where uid=#{uid}
+    </delete>
+</mapper>
