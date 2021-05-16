@@ -82,4 +82,19 @@ public interface SqlSession {
      * @return
      */
     public <T> T getMapper(Class<?> mapperClass) throws Exception;
+
+    /**
+     * 提交
+     */
+    public void commit();
+
+    /**
+     * 回滚
+     */
+    public void rollback();
+
+    /**
+     * 关闭splSession连接
+     */
+    public void close();
 }

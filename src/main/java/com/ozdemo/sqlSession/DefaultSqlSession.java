@@ -10,7 +10,14 @@ public class DefaultSqlSession implements SqlSession {
 
     private Configuration configuration;
 
+    private boolean autoCommit;
+
     public DefaultSqlSession() {
+        autoCommit = true;
+    }
+
+    public DefaultSqlSession(boolean autoCommit){
+        this.autoCommit = autoCommit;
     }
 
     public DefaultSqlSession(Configuration configuration) {
@@ -160,5 +167,20 @@ public class DefaultSqlSession implements SqlSession {
         });
 
         return (T) proxyInstance;
+    }
+
+    @Override
+    public void commit() {
+
+    }
+
+    @Override
+    public void rollback() {
+
+    }
+
+    @Override
+    public void close() {
+
     }
 }

@@ -3,9 +3,11 @@ package com.ozdemo.sqlSession;
 import com.ozdemo.config.BoundSql;
 import com.ozdemo.pojo.Configuration;
 import com.ozdemo.pojo.MappedStatement;
+import com.ozdemo.utils.DBconnection;
 import com.ozdemo.utils.GenericTokenParser;
 import com.ozdemo.utils.ParameterMapping;
 import com.ozdemo.utils.ParameterMappingTokenHandler;
+import org.apache.log4j.helpers.ThreadLocalMap;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
@@ -98,8 +100,9 @@ public class SimpleExecutor implements Executor {
      * @throws Exception
      */
     private PreparedStatement prepareStatement(Configuration configuration, MappedStatement mappedStatement, Object... params) throws Exception {
+
         //1、注册驱动，获取连接
-        Connection connection = configuration.getDataSource().getConnection();
+        Connection connection = DBconnection.getCurrConnection(configuration);
 
         //2、获取Sql语句 然后转换sql语句，并对#{}里面的值进行解析存储
         String sql = mappedStatement.getSql();
